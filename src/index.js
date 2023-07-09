@@ -6,8 +6,8 @@ const seedWithDummyData = require('../seeder');
 
 dotenv.config();
 //connect to DB
-// mongoose.set('useCreateIndex', true);
-// mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+mongoose.set('useFindAndModify', false);
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
     console.log('connected to DB');
     // seedWithDummyData();
