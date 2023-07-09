@@ -45,6 +45,21 @@ Sample Output:
 const getProductsPurchasedByUser = async (req, res) => {
     try {
         //Write the code to fetch all the products purchased by a user from the database
+        const { userId } = req.query;
+        const user = await User.findById(userId).populate('productsPurchased');
+
+        console.log(user, "-user")
+        if (!user) {
+            return res.status(404).json({ status: 'error', message: "User not found" })
+        }
+
+        const products = user.productsPurchased;
+
+        return res.status(200).json({
+            status: 'success',
+            message: 'Product Purchased by User',
+            data: { products }
+        })
     } catch (err) {
         res.status(400).json({
             message: "Couldn't Fetch the Data",
